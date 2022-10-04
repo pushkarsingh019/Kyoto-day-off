@@ -1,0 +1,12 @@
+.App {
+  font-family: Helvetica, sans-serif;
+}
+
+button {
+  margin-left: 1rem;
+}
+
+.options {
+  color: blue;
+  margin-left: 1rem;
+}
