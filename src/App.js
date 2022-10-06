@@ -20,10 +20,11 @@ function reducer(state, action) {
     case "DELETE_TASK":
       return state.filter((task) => task.id !== action.id);
     case "EDIT_TASK":
-      console.log(`Changing the value of ${action.id} to ${action.updateText}`);
-      console.log(state[action.id].task);
-      state[action.id].task = action.updateText;
-      console.log(state[action.id].task);
+      state.map((t) => {
+        if (t.id === action.id) {
+          t.task = action.updateText;
+        }
+      });
       return state;
     default:
       return state;
