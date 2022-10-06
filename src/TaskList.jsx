@@ -1,15 +1,19 @@
 import TaskComponent from "./TaskComponent";
 
-function TaskList({ tasks, onChange }) {
+function TaskList({ tasks, onDelete, onUpdate }) {
+  console.log(`printing from tasklist main ->`);
+  console.log(tasks);
   return (
     <section>
       {tasks.map((task) => {
+        console.log(`printing from tasklist ->`);
+        console.log(task);
         return (
           <TaskComponent
             key={task.id}
-            id={task.id}
-            task={task.task}
-            taskId={onChange}
+            task={task}
+            onDelete={onDelete}
+            onUpdate={onUpdate}
           ></TaskComponent>
         );
       })}

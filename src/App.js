@@ -20,10 +20,13 @@ function reducer(state, action) {
     case "DELETE_TASK":
       return state.filter((task) => task.id !== action.id);
     case "EDIT_TASK":
-      console.log("in THE EDIT section");
+      console.log(`Changing the value of ${action.id} to ${action.updateText}`);
+      console.log(state[action.id].task);
+      state[action.id].task = action.updateText;
+      console.log(state[action.id].task);
       return state;
     default:
-      throw new Error();
+      return state;
   }
 }
 
@@ -38,14 +41,16 @@ export default function App() {
     });
   };
 
-  const something = (id, option) => {
-    if (option === "edit") {
-      dispatch({ type: "EDIT_TASK", id });
-    } else if (option === "delete") {
-      dispatch({ type: "DELETE_TASK", id });
-    } else {
-      console.log("unexpected option");
-    }
+  const deleteTask = (id) => {
+    dispatch({ type: "DELETE_TASK", id });
+  };
+
+  const updateTask = (updateText, id) => {
+    dispatch({
+      type: "EDIT_TASK",
+      updateText: updateText.task,
+      id
+    });
   };
 
   return (
@@ -53,7 +58,7 @@ export default function App() {
       <h3>Day off in Kyoto</h3>
       <NewTask newTaskName={taskName} />
       <br />
-      <TaskList tasks={state} onChange={something} />
+      <TaskList tasks={state} onDelete={deleteTask} onUpdate={updateTask} />
     </div>
   );
 }
